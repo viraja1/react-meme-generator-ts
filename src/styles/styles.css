@@ -63,7 +63,7 @@ h2 {
 /* Form */
 .form {
   margin: 0 auto;
-  max-width: 380px;
+  max-width: 450px;
 }
 
 .form__inputs,
@@ -92,21 +92,17 @@ h2 {
   outline-color: #0984e3;
 }
 
-.form__inputs input + input,
-.form__btns .btn + .btn {
+.form__inputs input + input{
   margin-left: 12px;
 }
 
-.form__btns {
-  justify-content: center;
-}
 
 .form__btns .btn {
-  padding: 8px 12px;
   border: 0;
   cursor: pointer;
   color: #fff;
   transition: background .25s ease-in-out;
+  margin-right: 5px;
 }
 
 /* Buttons */

@@ -47,3 +47,4 @@ thumbs.db
 # Windows shortcuts #
 #####################
 *.lnk
+.idea

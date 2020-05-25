@@ -1,9 +1,11 @@
 // Import React
 import * as React from 'react'
+import Button from 'react-bootstrap-button-loader';
 
 // Interface for Form Component
 interface FormInterface {
   isMemeGenerated: boolean;
+  isLoadingGenerator: boolean;
   textBottom: string;
   textTop: string;
   handleImageChange: () => void;
@@ -40,7 +42,7 @@ const Form = (props: FormInterface) => {
       <div className="form__btns">
         {/* Button to load random image from api.imgflip.com */}
         <button
-          className="btn btn-primary"
+          className="btn btn-sm btn-primary"
           type="button"
           onClick={props.handleImageChange}
         >
@@ -49,25 +51,25 @@ const Form = (props: FormInterface) => {
 
         {/* 'Button' to load image from disk */}
         <label
-          className="btn btn-primary"
+          className="btn btn-sm btn-primary"
           htmlFor="fileInput"
+          style={{marginBottom: "0px"}}
         >
-          Load image
+          Upload image
           <input id="fileInput" name="fileInput" type="file" accept=".jpg, .jpeg, .png" onChange={props.handleImageInputChange} hidden />
         </label>
 
         {/* Button to generate png image of the meme */}
-        <button
-          className="btn btn-primary"
-          type="button"
+        <Button variant="primary btn btn-sm"
           onClick={props.handleMemeGeneration}
+          loading={props.isLoadingGenerator}
         >
           Generate meme
-        </button>
+        </Button>
 
         {/* Button to remove the meme image from the DOM */}
         {props.isMemeGenerated && <button
-          className="btn btn-danger"
+          className="btn btn-sm btn-danger"
           type="button"
           onClick={props.handleMemeReset}
         >
