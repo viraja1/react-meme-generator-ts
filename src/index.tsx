@@ -31,14 +31,15 @@ function App() {
   async function fetchImage() {
 
     // Update activeImage state
-    await setActiveImage('https://i.imgflip.com/9ehk.jpg');
+    setActiveImage('./memes/1.jpg');
 
     // Get the memes
-    const imgData = await fetch('https://api.imgflip.com/get_memes').then(res => res.json()).catch(err => console.error(err))
-    const { memes } = await imgData.data
-
+    let memes = [];
+    for (var i = 1; i <= 13; i++) {
+      memes.push("./memes/" + i.toString() + ".jpg")
+    }
     // Update images state
-    await setImages(memes)
+    setImages(memes)
   }
 
   // Handle input elements
@@ -52,13 +53,13 @@ function App() {
     }
   }
 
-  // Choose random images from images fetched from api.imgflip.com
+  // Choose random images
   function handleImageChange() {
     // Choose random image
-    const image = images[Math.floor(Math.random() * images.length)]
-
+    const newImages = images.filter(x => x !== activeImage);
+    const image = newImages[Math.floor(Math.random() * newImages.length)];
     // Update activeImage state
-    setActiveImage(image.url)
+    setActiveImage(image)
   }
 
   // Handle image upload via file input
@@ -83,7 +84,7 @@ function App() {
       .then((blob) => {
         const formData = new FormData();
         formData.append("file", blob);
-        const CDN_URL = 'https://siasky.net/skynet/skyfile/';
+        const CDN_URL = 'https://skynethub.io/skynet/skyfile/';
         return fetch(CDN_URL, {
           method: "POST",
           body: formData
@@ -93,7 +94,7 @@ function App() {
           const uploaded_url = json["skylink"];
           const a = document.createElement('a');
           a.target = '_blank';
-          a.href = `https://siasky.net/${uploaded_url}`;
+          a.href = `https://skynethub.io/${uploaded_url}`;
           a.innerText = 'Meme Link';
           resultContainerRef.current.appendChild(a);
           setIsMemeGenerated(true)
